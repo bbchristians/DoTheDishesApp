@@ -13,6 +13,10 @@
     <string name="unknown_room_id">UNKNOWN_ROOM_ID</string>
     <string name="unknown_user_id">UNKNOWN_USER_ID</string>
 
+    <!-- Room View -->
+    <string name="welcome_text">%s, you\'re in</string>
+    <string name="room_id">Room ID: %s</string>
+
     <!-- Constants -->
     <string name="user_info_id_key">USER_INFO</string>
 

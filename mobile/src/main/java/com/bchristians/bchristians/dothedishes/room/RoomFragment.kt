@@ -20,14 +20,20 @@ class RoomFragment: Fragment() {
         this.userInfo = this.arguments?.getParcelable(this.context?.getString(R.string.user_info_id_key))
 
         rootView?.let {
-            initTitle(it)
+            initTitleText(it)
         }
 
         return rootView
     }
 
-    private fun initTitle(rootView: View) {
-        val titleText = "${userInfo?.userId}: ${userInfo?.roomId}"
-        rootView.findViewById<TextView>(R.id.room_title)?.text = titleText
+    private fun initTitleText(rootView: View) {
+        // Room Welcome
+        rootView.findViewById<TextView>(R.id.room_welcome)?.text =
+                context?.getString(R.string.welcome_text, this.userInfo?.userId ?: "Unknown")
+        // Room Name
+        rootView.findViewById<TextView>(R.id.room_name)?.text = "The Good Place" // TODO load from webservice
+        // Room Id Label
+        rootView.findViewById<TextView>(R.id.room_id)?.text =
+                context?.getString(R.string.room_id, this.userInfo?.roomId ?: "Unknown")
     }
 }
