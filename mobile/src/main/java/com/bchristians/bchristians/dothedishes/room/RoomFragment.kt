@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.ToggleButton
 import com.bchristians.bchristians.dothedishes.R
 import com.bchristians.bchristians.dothedishes.room.assignment.Assignment
 import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentView
@@ -26,6 +28,7 @@ class RoomFragment: Fragment() {
 
         rootView?.let {
             initTitleText(it)
+            initAssignmentButtons(it)
         }
 
         return rootView
@@ -58,5 +61,15 @@ class RoomFragment: Fragment() {
         // Room Id Label
         rootView.findViewById<TextView>(R.id.room_id)?.text =
                 context?.getString(R.string.room_id, this.userInfo?.roomId ?: "Unknown")
+    }
+
+    private fun initAssignmentButtons(rootView: View) {
+        rootView.findViewById<Button>(R.id.new_assignment_button)?.setOnClickListener {
+            (this.activity as? RoomActivity)?.startCreateAssignmentActivity()
+        }
+
+        rootView.findViewById<ToggleButton>(R.id.delete_mode_button)?.let { deleteModeButton ->
+            // TODO make this button work
+        }
     }
 }

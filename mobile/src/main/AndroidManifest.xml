@@ -27,6 +27,7 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".room.RoomActivity"/>
+        <activity android:name=".room.assignment.CreateAssignmentActivity"/>
 
     </application>
 
