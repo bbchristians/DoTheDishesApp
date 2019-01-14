@@ -1,75 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:weightSum="5">
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginLeft="100dp"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_weight="2">
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/room_id_label"/>
-
-        <EditText
-                android:id="@+id/room_id_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:padding="14dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/edit_text_background"
-                android:hint="@string/room_id_hint"/>
-
-        <Button
-                android:id="@+id/submit_button"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/button_1"
-                android:elevation="2dp"
-                android:text="@string/submit_button"
-                android:textColor="@color/colorPale"
-                android:foreground="?attr/selectableItemBackground"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="3"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp">
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/past_room_id_label"
-                android:textSize="18sp"
-                android:paddingBottom="8dp"/>
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
 
         <LinearLayout
-                android:id="@+id/previous_room_ids"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_margin="100dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/past_room_id_empty"/>
+                    android:layout_marginStart="8dp"
+                    android:text="@string/user_id_label"/>
+
+            <EditText
+                    android:id="@+id/user_id_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:padding="14dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/user_id_hint"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/room_id_label"/>
+
+            <EditText
+                    android:id="@+id/room_id_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:padding="14dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/room_id_hint"/>
+
+            <Button style="@style/ButtonPrimary"
+                    android:id="@+id/submit_button"
+                    android:layout_width="match_parent"
+                    android:text="@string/submit_button"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/past_room_id_label"
+                    android:textSize="18sp"
+                    android:paddingBottom="8dp"/>
+
+            <LinearLayout
+                    android:id="@+id/previous_room_ids"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/past_room_id_empty"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

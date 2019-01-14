@@ -7,16 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bchristians.bchristians.dothedishes.R
+import com.bchristians.bchristians.dothedishes.user.UserInfo
 
 class RoomFragment: Fragment() {
 
     private var rootView: View? = null
-    private var roomId: String? = null
+    private var userInfo: UserInfo? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_room, container, false)
 
-        this.roomId = this.arguments?.getString(this.context?.getString(R.string.room_id_key))
+        this.userInfo = this.arguments?.getParcelable(this.context?.getString(R.string.user_info_id_key))
 
         rootView?.let {
             initTitle(it)
@@ -26,6 +27,7 @@ class RoomFragment: Fragment() {
     }
 
     private fun initTitle(rootView: View) {
-        rootView.findViewById<TextView>(R.id.room_title)?.text = this.roomId
+        val titleText = "${userInfo?.userId}: ${userInfo?.roomId}"
+        rootView.findViewById<TextView>(R.id.room_title)?.text = titleText
     }
 }

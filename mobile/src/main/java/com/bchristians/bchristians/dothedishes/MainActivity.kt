@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import com.bchristians.bchristians.dothedishes.room.RoomActivity
 import com.bchristians.bchristians.dothedishes.selectroom.SelectRoomFragment
 import com.bchristians.bchristians.dothedishes.sharedpreferences.SharedPreferencesClient
+import com.bchristians.bchristians.dothedishes.user.UserInfo
 
 class MainActivity: AppCompatActivity() {
 
@@ -29,12 +30,12 @@ class MainActivity: AppCompatActivity() {
         transaction.commit()
     }
 
-    fun submitRoomId(roomId: String) {
+    fun submitRoomId(userInfo: UserInfo) {
         // Save the room to persistent storage so that it is known as the last accessed room
-        this.sharedPreferenceClient.addAccessedRoom(roomId)
+        this.sharedPreferenceClient.addAccessedRoom(userInfo)
         // Start the new activity for the selected room
         val roomIntent = Intent(this, RoomActivity::class.java)
-        roomIntent.putExtra(this.getString(R.string.room_id_key), roomId)
+        roomIntent.putExtra(this.getString(R.string.user_info_id_key), userInfo)
         this.startActivity(roomIntent)
     }
 

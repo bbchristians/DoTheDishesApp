@@ -23,19 +23,26 @@
                 android:layout_height="wrap_content"
                 android:paddingEnd="8dp"
                 android:paddingStart="0dp"
-                android:layout_weight="2"
-                android:text="@string/unknown_id"
+                android:layout_weight="1"
+                android:text="@string/unknown_room_id"
                 tools:text="12345"/>
 
-        <Button
-                android:id="@+id/submit_button_prev"
+        <TextView
+                android:id="@+id/user_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingEnd="8dp"
+                android:paddingStart="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_1"
-                android:text="@string/submit_button"
-                android:textColor="@color/colorPale"
-                android:foreground="?attr/selectableItemBackground"/>
+                android:text="@string/unknown_user_id"
+                tools:text="Kyle"/>
+
+        <Button
+                style="@style/ButtonPrimary"
+                android:id="@+id/submit_button_prev"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/submit_button"/>
 
     </LinearLayout>
 

@@ -4,24 +4,25 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.bchristians.bchristians.dothedishes.R
+import com.bchristians.bchristians.dothedishes.user.UserInfo
 
 class RoomActivity: AppCompatActivity() {
 
-    private var roomId: String? = null
+    private var userInfo: UserInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_room)
 
-        val roomIdKey = this.getString(R.string.room_id_key)
-        this.roomId = this.intent?.extras?.getString(roomIdKey)
+        val userInfoKey = this.getString(R.string.user_info_id_key)
+        this.userInfo = this.intent?.extras?.getParcelable(userInfoKey)
 
-        roomId ?: this.finish()
+        userInfo ?: this.finish()
 
         val fragment = RoomFragment()
         val roomIdBundle = Bundle()
-        roomIdBundle.putString(roomIdKey, this.roomId)
+        roomIdBundle.putParcelable(userInfoKey, this.userInfo)
         fragment.arguments = roomIdBundle
         switchToFragment(fragment, "room")
     }

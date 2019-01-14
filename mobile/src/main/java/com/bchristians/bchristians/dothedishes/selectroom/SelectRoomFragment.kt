@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.bchristians.bchristians.dothedishes.MainActivity
 import com.bchristians.bchristians.dothedishes.R
+import com.bchristians.bchristians.dothedishes.user.UserInfo
 
 class SelectRoomFragment: Fragment() {
 
@@ -36,10 +37,13 @@ class SelectRoomFragment: Fragment() {
         root.findViewById<Button>(R.id.submit_button)?.let { button ->
             button.setOnClickListener {
                 val enteredRoomId = root.findViewById<EditText>(R.id.room_id_edit_text)?.text?.toString() ?: ""
-                if ( enteredRoomId.isNotEmpty() ) {
-                    (this.context as? MainActivity)?.submitRoomId(enteredRoomId)
+                val enteredUserId = root.findViewById<EditText>(R.id.user_id_edit_text)?.text?.toString() ?: ""
+                if ( enteredRoomId.isEmpty() ) {
+                    // TODO report error
+                } else if( enteredUserId.isEmpty() ) {
+                    // TODO report error
                 } else {
-                    // TODO error report
+                    (this.context as? MainActivity)?.submitRoomId(UserInfo(enteredUserId, enteredRoomId))
                 }
             }
         }
