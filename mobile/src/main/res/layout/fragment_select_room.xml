@@ -58,11 +58,12 @@
                 android:paddingBottom="8dp"/>
 
         <LinearLayout
+                android:id="@+id/previous_room_ids"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <TextView
-                    android:id="@+id/previous_room_ids"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/past_room_id_empty"/>

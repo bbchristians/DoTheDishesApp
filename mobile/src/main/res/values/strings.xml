@@ -8,6 +8,7 @@
     <string name="past_room_id_label">Previous Room IDs</string>
     <string name="past_room_id_empty">You have not yet entered any room IDs</string>
     <string name="submit_button">Submit</string>
+    <string name="unknown_id">UNKNOWN_ID</string>
 
     <!-- Constants -->
     <string name="room_id_key">ROOM_ID</string>
