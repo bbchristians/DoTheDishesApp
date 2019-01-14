@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.bchristians.bchristians.dothedishes.room.assignment.AssignmentView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                                        xmlns:tools="http://schemas.android.com/tools"
+                                                                        android:orientation="horizontal"
+                                                                        android:layout_width="match_parent"
+                                                                        android:layout_height="wrap_content"
+                                                                        android:background="@color/colorPale"
+                                                                        android:elevation="2dp"
+                                                                        android:padding="12dp"
+                                                                        android:weightSum="3">
+
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+        <TextView
+                android:id="@+id/assignment_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                tools:text="Do the Dishes"/>
+
+        <TextView
+                android:id="@+id/assignment_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Tomorrow"/>
+
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/action_button"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:paddingEnd="14dp"
+            android:paddingStart="8dp"
+            tools:text="@string/action_button_complete"/>
+
+</com.bchristians.bchristians.dothedishes.room.assignment.AssignmentView>

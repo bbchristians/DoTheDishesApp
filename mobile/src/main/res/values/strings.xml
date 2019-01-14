@@ -16,6 +16,13 @@
     <!-- Room View -->
     <string name="welcome_text">%s, you\'re in</string>
     <string name="room_id">Room ID: %s</string>
+    <string name="assignments_upcoming">Upcoming Assignments:</string>
+    <string name="assignments_upcoming_empty">You have no upcoming assignments!</string>
+    <string name="assignments_other">Other Assignments:</string>
+    <string name="assignments_other_empty">There are no assignments for this room.</string>
+
+    <string name="action_button_nudge">Nudge</string>
+    <string name="action_button_complete">Complete</string>
 
     <!-- Constants -->
     <string name="user_info_id_key">USER_INFO</string>
