@@ -7,13 +7,23 @@ import com.bchristians.bchristians.dothedishes.R
 
 class RoomActivity: AppCompatActivity() {
 
+    private var roomId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_room)
 
-        switchToFragment(RoomFragment(), "room")
+        val roomIdKey = this.getString(R.string.room_id_key)
+        this.roomId = this.intent?.extras?.getString(roomIdKey)
+
+        roomId ?: this.finish()
+
+        val fragment = RoomFragment()
+        val roomIdBundle = Bundle()
+        roomIdBundle.putString(roomIdKey, this.roomId)
+        fragment.arguments = roomIdBundle
+        switchToFragment(fragment, "room")
     }
 
     fun switchToFragment(fragment: Fragment, tag: String?) {

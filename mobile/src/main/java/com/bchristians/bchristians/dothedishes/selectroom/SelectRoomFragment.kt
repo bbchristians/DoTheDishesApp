@@ -40,7 +40,7 @@ class SelectRoomFragment: Fragment() {
 
     private fun submitRoomId(roomId: String) {
         val roomIntent = Intent(this.context, RoomActivity::class.java)
-        roomIntent.extras?.putString(this.context?.getString(R.string.room_id_key), roomId)
+        roomIntent.putExtra(this.context?.getString(R.string.room_id_key), roomId)
         this.context?.startActivity(roomIntent)
     }
 }
