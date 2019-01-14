@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DoTheDishes</string>
+    <string name="app_name_abbrev">do_the_dishes</string>
 </resources>
