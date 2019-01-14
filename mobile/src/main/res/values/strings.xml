@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">DoTheDishes</string>
     <string name="app_name_abbrev">do_the_dishes</string>
+
+    <!-- Select Room -->
+    <string name="room_id_label">Room ID</string>
+    <string name="room_id_hint">12345</string>
+    <string name="past_room_id_label">Previous Room IDs</string>
+    <string name="past_room_id_empty">You have not yet entered any room IDs</string>
+    <string name="submit_button">Submit</string>
+
+    <!-- Constants -->
+    <string name="room_id_key">ROOM_ID</string>
+
 </resources>

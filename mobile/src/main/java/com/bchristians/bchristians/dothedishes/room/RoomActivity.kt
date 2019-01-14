@@ -1,18 +1,19 @@
-package com.bchristians.bchristians.dothedishes
+package com.bchristians.bchristians.dothedishes.room
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.bchristians.bchristians.dothedishes.selectroom.SelectRoomFragment
+import com.bchristians.bchristians.dothedishes.R
 
-class MainActivity: AppCompatActivity() {
+class RoomActivity: AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_room)
 
-        switchToFragment(SelectRoomFragment(), "select_room")
+        switchToFragment(RoomFragment(), "room")
     }
 
     fun switchToFragment(fragment: Fragment, tag: String?) {
