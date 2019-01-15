@@ -39,7 +39,7 @@
                 android:paddingBottom="6dp"
                 android:text="@string/create_assignment_field_label_assignee"/>
 
-        <EditText
+        <AutoCompleteTextView
                 android:id="@+id/field_assignment_assignee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
