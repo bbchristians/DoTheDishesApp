@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -33,6 +35,17 @@ dependencies {
     implementation 'com.google.android.gms:play-services-wearable:+'
     implementation 'com.google.code.gson:gson:2.8.5'
 
+    /* Dagger 2 Injection */
+    implementation 'com.google.dagger:dagger:2.15'
+    implementation 'com.google.dagger:dagger-android:2.15'
+    implementation 'com.google.dagger:dagger-android-support:2.15'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
+    kapt 'com.google.dagger:dagger-compiler:2.15'
+    kapt 'com.google.dagger:dagger-android-processor:2.15'
+
+    /* OkHttp3 for network requests */
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }
 
 androidExtensions {

@@ -16,6 +16,7 @@
     <!-- Room View -->
     <string name="welcome_text">%s, you\'re in</string>
     <string name="room_id">Room ID: %s</string>
+    <string name="room_name_placeholder">Loading…</string>
     <string name="assignments_upcoming">Upcoming Assignments:</string>
     <string name="assignments_upcoming_empty">You have no upcoming assignments!</string>
     <string name="assignments_other">Assignments:</string>

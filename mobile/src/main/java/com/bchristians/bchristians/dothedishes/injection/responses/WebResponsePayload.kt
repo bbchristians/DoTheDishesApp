@@ -1,0 +1,3 @@
+package com.bchristians.bchristians.dothedishes.injection.responses
+
+interface WebResponsePayload
