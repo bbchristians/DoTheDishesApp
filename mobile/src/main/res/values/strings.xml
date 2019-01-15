@@ -28,6 +28,16 @@
     <string name="delete_mode_button_on">Stop Deleting</string>
     <string name="delete_mode_button_off">Delete</string>
 
+    <!-- Create Assignment View -->
+    <string name="create_assignment_title">Create Assignment</string>
+    <string name="create_assignment_field_label_name">Assignment Name</string>
+    <string name="create_assignment_field_hint_name">Do the Dishes</string>
+    <string name="create_assignment_field_label_assignee">Assign To</string>
+    <string name="create_assignment_field_hint_assignee">Kyle</string>
+    <string name="create_assignment_field_label_repeating">Repeating?</string>
+
+    <string name="create_assignment_button_confirm">Create</string>
+
     <!-- Constants -->
     <string name="user_info_id_key">USER_INFO</string>
 

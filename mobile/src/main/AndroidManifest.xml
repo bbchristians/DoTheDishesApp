@@ -24,10 +24,19 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".room.RoomActivity"/>
-        <activity android:name=".room.assignment.CreateAssignmentActivity"/>
+                android:name=".MainActivity"
+                android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+                android:name=".room.RoomActivity"
+                android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+                android:name=".room.assignment.CreateAssignmentActivity"
+                android:screenOrientation="portrait">
+        </activity>
 
     </application>
 
