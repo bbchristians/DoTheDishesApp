@@ -26,7 +26,7 @@
         <EditText
                 android:id="@+id/field_assignment_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48sp"
                 android:background="@drawable/edit_text_background"
                 android:hint="@string/create_assignment_field_hint_name"
                 android:padding="8dp"
@@ -39,14 +39,15 @@
                 android:paddingBottom="6dp"
                 android:text="@string/create_assignment_field_label_assignee"/>
 
-        <AutoCompleteTextView
+        <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/field_assignment_assignee"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48sp"
                 android:background="@drawable/edit_text_background"
                 android:hint="@string/create_assignment_field_hint_assignee"
                 android:padding="8dp"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:dropDownVerticalOffset="48sp"/>
 
         <Button
                 style="@style/ButtonPrimary"
