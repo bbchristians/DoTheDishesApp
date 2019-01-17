@@ -17,6 +17,10 @@ class ScheduleAvailabilityView(c: Context, a: AttributeSet): LinearLayout(c,a) {
         this.findViewById<TextView>(R.id.user_name)?.text = userId
     }
 
+    fun userIsAvailable(dotw: DayOfTheWeek): Boolean {
+        return this.findViewById<ToggleButton>(dotw.buttonId)?.isChecked ?: false
+    }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         DayOfTheWeek.values().forEach { dotw ->

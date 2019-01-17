@@ -24,6 +24,8 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
     private var inflater: LayoutInflater? = null
     private var userInfo: UserInfo? = null
 
+    private var users: List<String> = listOf()
+
     @Inject
     lateinit var roomViewModel: RoomViewModel
 
@@ -41,6 +43,7 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
         }
 
         setupFields()
+        setupButtons()
 
         return this.rootView
     }
@@ -71,6 +74,12 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) { /* Intentionally Blank */ }
+        }
+    }
+
+    private fun setupButtons() {
+        rootView?.findViewById<Button>(R.id.confirm_button)?.setOnClickListener {
+            this.getUsersAvailability()
         }
     }
 
@@ -118,6 +127,19 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
         }
     }
 
+    fun getUsersAvailability(): Map<String, List<ScheduleAvailabilityView.DayOfTheWeek>> {
+        val availabilityMap = HashMap<String, List<ScheduleAvailabilityView.DayOfTheWeek>>()
+        val selectedUser = this.rootView?.findViewById<AppCompatSpinner>(R.id.field_assignment_assignee)?.selectedItem
+        if( selectedUser == ASSIGNMENT_EVERYONE ) { this.users } else { listOf(selectedUser.toString()) }.forEach { userId ->
+            rootView?.findViewWithTag<ScheduleAvailabilityView>(getExceptionUserTag(userId))?.let { userAvailabilityView ->
+                availabilityMap.put(userId, ScheduleAvailabilityView.DayOfTheWeek.values().filter{ dotw ->
+                    userAvailabilityView.userIsAvailable(dotw)
+                })
+            }
+        }
+        return availabilityMap
+    }
+
     override fun onChanged(t: Room?) {
         t ?: return
         val allUsersList = listOf(ASSIGNMENT_EVERYONE)
@@ -128,6 +150,7 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
                     ?.sorted()
                     ?.asIterable() ?: listOf()
             )
+        this.users = allUsersList
         setAssigneeAutofill(allUsersList)
         setUpUserAvailability(allUsersList)
     }
