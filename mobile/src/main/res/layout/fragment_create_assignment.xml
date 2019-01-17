@@ -44,10 +44,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="48sp"
                 android:background="@drawable/edit_text_background"
-                android:hint="@string/create_assignment_field_hint_assignee"
                 android:padding="8dp"
                 android:inputType="text"
                 android:dropDownVerticalOffset="48sp"/>
+
+        <LinearLayout
+                android:id="@+id/schedule_exceptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="0dp"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/create_assignment_field_label_availability"/>
+
+            <LinearLayout
+                    android:id="@+id/availability_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+        </LinearLayout>
 
         <Button
                 style="@style/ButtonPrimary"

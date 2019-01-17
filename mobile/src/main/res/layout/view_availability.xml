@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.bchristians.bchristians.dothedishes.room.assignment.ScheduleAvailabilityView
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="16sp"
+            tools:text="Kyle"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
+
+            <ToggleButton
+                    android:id="@+id/weekday_availability_sunday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekday_sunday"
+                    android:textOff="@string/weekday_sunday"
+                    android:background="@drawable/availability_button"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+
+            <ToggleButton
+                    android:id="@+id/weekday_availability_monday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekday_monday"
+                    android:textOff="@string/weekday_monday"
+                    android:background="@drawable/availability_button"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+
+            <ToggleButton
+                    android:id="@+id/weekday_availability_tuesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekday_tuesday"
+                    android:textOff="@string/weekday_tuesday"
+                    android:background="@drawable/availability_button"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+
+            <ToggleButton
+                    android:id="@+id/weekday_availability_wednesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekday_wednesday"
+                    android:textOff="@string/weekday_wednesday"
+                    android:background="@drawable/availability_button"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+
+            <ToggleButton
+                    android:id="@+id/weekday_availability_thursday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekday_thursday"
+                    android:textOff="@string/weekday_thursday"
+                    android:background="@drawable/availability_button"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+
+            <ToggleButton
+                    android:id="@+id/weekday_availability_friday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekday_friday"
+                    android:textOff="@string/weekday_friday"
+                    android:background="@drawable/availability_button"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+
+            <ToggleButton
+                    android:id="@+id/weekday_availability_saturday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekday_saturday"
+                    android:textOff="@string/weekday_saturday"
+                    android:background="@drawable/availability_button"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.bchristians.bchristians.dothedishes.room.assignment.ScheduleAvailabilityView>
