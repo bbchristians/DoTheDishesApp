@@ -16,9 +16,16 @@ import javax.inject.Inject
 import android.app.Activity
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class CreateAssignmentFragment: Fragment(), Observer<Room> {
+
+    private val DATE_FORMAT = SimpleDateFormat("MM/dd/yyyy", Locale.US)
 
     private var rootView: View? = null
     private var inflater: LayoutInflater? = null
@@ -78,8 +85,22 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
     }
 
     private fun setupButtons() {
+        // Confirm Button
         rootView?.findViewById<Button>(R.id.confirm_button)?.setOnClickListener {
             this.getUsersAvailability()
+            this.getFrequency()
+        }
+
+        // Frequency Single Select
+        val singleSelectOptions = listOf(R.id.repeat_custom, R.id.repeat_single)
+        singleSelectOptions.forEach { singleSelectId ->
+            rootView?.findViewById<CheckBox>(singleSelectId)?.setOnClickListener { checkBox ->
+                if( (checkBox as? CheckBox)?.isChecked == true ) {
+                    singleSelectOptions.filter { it != singleSelectId }.forEach {
+                        rootView?.findViewById<CheckBox>(it)?.isChecked = false
+                    }
+                }
+            }
         }
     }
 
@@ -138,6 +159,35 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
             }
         }
         return availabilityMap
+    }
+
+    fun getFrequency(): AssignmentRepetition {
+        var startDate: String = ""
+        var endDate: String = ""
+        var repeatFrequency: Int = 1
+        // Case: Single Assignment
+        if( rootView?.findViewById<CheckBox>(R.id.repeat_single)?.isChecked == true ) {
+            startDate = rootView?.findViewById<EditText>(R.id.no_repeat_date)?.text?.toString() ?: ""
+            endDate = startDate
+        } else if( rootView?.findViewById<CheckBox>(R.id.repeat_custom)?.isChecked == true ) {
+            startDate = "TODO"// Today
+            endDate = rootView?.findViewById<EditText>(R.id.repeat_custom_end_date)?.text?.toString() ?: ""
+            repeatFrequency = rootView?.findViewById<EditText>(R.id.repeat_custom_days)?.text?.toString()?.toInt() ?: 1
+        }
+        // Determine the year so the user doesn't need to enter it
+        val thisYear = Calendar.getInstance().get(Calendar.YEAR)
+        var parsedStartDate: Date? = null
+        var parsedEndDate: Date? = null
+            parsedStartDate = DATE_FORMAT.parse("%s/${thisYear}".format(startDate))
+            if( parsedStartDate.before(Calendar.getInstance().time) ) {
+                parsedStartDate = DATE_FORMAT.parse("%s/${thisYear+1}".format(startDate))
+            }
+            parsedEndDate = DATE_FORMAT.parse("%s/${thisYear}".format(endDate))
+            if( parsedEndDate.before(Calendar.getInstance().time) ) {
+                parsedEndDate = DATE_FORMAT.parse("%s/${thisYear+1}".format(endDate))
+            }
+        val a = AssignmentRepetition(parsedStartDate, parsedEndDate, repeatFrequency)
+        return a
     }
 
     override fun onChanged(t: Room?) {

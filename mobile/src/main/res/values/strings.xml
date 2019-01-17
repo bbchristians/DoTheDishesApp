@@ -34,7 +34,13 @@
     <string name="create_assignment_field_label_name">Assignment Name</string>
     <string name="create_assignment_field_hint_name">Do the Dishes</string>
     <string name="create_assignment_field_label_assignee">Assign To</string>
-    <string name="create_assignment_field_label_repeating">Repeating?</string>
+    <string name="create_assignment_field_label_repeating">Frequency</string>
+    <string name="create_assignment_no_repeat">Single assignment on </string>
+    <string name="create_assignment_no_repeat_hint">mm/dd</string>
+    <string name="create_assignment_repeat_1">Repeat every </string>
+    <string name="create_assignment_repeat_2">day(s), until </string>
+    <string name="create_assignment_repeat_hint_1">7</string>
+    <string name="create_assignment_repeat_hint_2">mm/dd</string>
 
     <string name="create_assignment_field_label_availability">Availability</string>
 
