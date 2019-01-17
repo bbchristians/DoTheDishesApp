@@ -5,9 +5,13 @@ import android.arch.lifecycle.MutableLiveData
 import com.bchristians.bchristians.dothedishes.injection.Repository
 import com.bchristians.bchristians.dothedishes.injection.responses.Room
 import com.bchristians.bchristians.dothedishes.room.assignment.Assignment
+import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentRepetition
+import com.bchristians.bchristians.dothedishes.room.assignment.ScheduleAvailabilityView
 import com.bchristians.bchristians.dothedishes.user.UserInfo
 import java.util.*
 import javax.inject.Inject
+
+
 
 class RoomViewModel @Inject constructor(private val repository: Repository) {
 
@@ -39,5 +43,59 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
                 )
             )
         )
+    }
+
+    fun createAndPostAssignmentCreationEvent(
+        roomId: String, assignmentName: String, frequency: AssignmentRepetition,
+        createdUserId: String, userAvailability: Map<String, List<ScheduleAvailabilityView.DayOfTheWeek>>
+    ) {
+        val roomData = this.roomLiveData[roomId]?.value ?: return
+        // Shuffle the list of users to actually randomize the list
+        val shuffledUsers = userAvailability.keys.shuffled()
+
+        // Generate schedule
+        val daysBetween = daysBetween(frequency.startDate, frequency.endDate)
+        val userAssignments = HashMap<String, MutableList<Assignment>>()
+        shuffledUsers.forEach {
+            userAssignments[it] = mutableListOf()
+        }
+        var curDay = 0
+        while( curDay <= daysBetween ) {
+            val day = ScheduleAvailabilityView.DayOfTheWeek.values()[curDay % 7]
+            var assigneeFound = false
+            shuffledUsers.sortedBy { (userAssignments[it]?.size ?: -1) }.forEach { userId ->
+                if( !assigneeFound && day in userAvailability[userId] ?: listOf() ) {
+                    userAssignments[userId]?.add(
+                        Assignment(
+                            assignmentName,
+                            addDays(frequency.startDate, curDay),
+                            false,
+                            userId,
+                            roomData.roomId,
+                            createdUserId
+                        )
+                    )
+                    assigneeFound = true
+                    // TODO report if no task added
+                }
+            }
+            curDay++
+        }
+        print(userAssignments)
+    }
+
+    companion object {
+
+        fun daysBetween(d1: Date, d2: Date): Long {
+            return ((d2.time - d1.time) / (1000L * 60L * 60L * 24L))
+        }
+
+        fun addDays(date: Date, days: Int): Date {
+            val cal = Calendar.getInstance()
+            cal.time = date
+            cal.add(Calendar.DAY_OF_YEAR, days)
+            return cal.time
+        }
+
     }
 }
