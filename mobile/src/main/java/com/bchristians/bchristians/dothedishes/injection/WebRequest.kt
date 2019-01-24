@@ -1,7 +1,10 @@
 package com.bchristians.bchristians.dothedishes.injection
 
 import com.bchristians.bchristians.dothedishes.injection.responses.WebResponsePayload
+import com.google.gson.Gson
+import okhttp3.MediaType
 import okhttp3.Request
+import okhttp3.RequestBody
 
 
 /**
@@ -9,32 +12,23 @@ import okhttp3.Request
  */
 class WebRequest(
     private val endpoint: WebRequestEndPoint,
-    val responseClass: Class<out WebResponsePayload>
+    val responseClass: Class<out WebResponsePayload>,
+    val body: Any? = null
 ) {
 
-    // TODO update to actual URL
     @Suppress("PrivatePropertyName")
-    private val BASE_URL = "https://reqres.in/api/"
+    private val BASE_URL = "https://do-the-dishes-service.herokuapp.com"
+
+    private val gson = Gson()
 
     fun buildOkHttpRequest(): Request {
         // If more builder functions are added, they must also be implemented here
-        return Request.Builder()
+        val builder = Request.Builder()
             .url("$BASE_URL${this.endpoint}")
-            .build()
-    }
-
-    class Builder (
-        private val endPoint: WebRequestEndPoint,
-        private val responseClass: Class<out WebResponsePayload>
-    ) {
-
-        // Create function
-        fun create(): WebRequest? {
-            return WebRequest(endPoint, responseClass)
+        if( this.body != null ) {
+            builder.post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(body)))
         }
-
-        // Builder functions
-        // TODO add functionality here for constructing a web request
+        return builder.build()
     }
 
 }
