@@ -96,7 +96,6 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
                 CreateRoomPayload(roomName)
             )
         )
-        (requestLiveData as? MutableLiveData<WebResponsePayload>)?.postValue(RoomIdResponse(1))
         return requestLiveData
     }
 

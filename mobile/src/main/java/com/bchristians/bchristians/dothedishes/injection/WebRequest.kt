@@ -18,7 +18,7 @@ class WebRequest(
 ) {
 
     @Suppress("PrivatePropertyName")
-    private val BASE_URL = "https://do-the-dishes-service.herokuapp.com/"
+    private val BASE_URL = "http://10.0.2.2:5000/"
 
     private val gson = Gson()
 
