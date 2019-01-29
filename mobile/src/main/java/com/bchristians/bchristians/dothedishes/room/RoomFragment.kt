@@ -15,6 +15,7 @@ import com.bchristians.bchristians.dothedishes.injection.responses.Room
 import com.bchristians.bchristians.dothedishes.room.assignment.Assignment
 import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentView
 import com.bchristians.bchristians.dothedishes.user.UserInfo
+import java.util.*
 import javax.inject.Inject
 
 class RoomFragment: Fragment(), Observer<Room> {
@@ -70,12 +71,25 @@ class RoomFragment: Fragment(), Observer<Room> {
     }
 
     private fun displayAssignments(assignments: List<Assignment>) {
+        val upcomingAssignments = assignments.filter { assignment ->
+            assignment.assignedUser == this.userInfo?.userId &&
+                    assignment.date != null &&
+                    RoomViewModel.daysBetween(Calendar.getInstance().time, assignment.date) < 8
+        }
         rootView?.findViewById<ViewGroup>(R.id.upcoming_assignments_holder)?.let { upcomingAssignmentsHolder ->
             upcomingAssignmentsHolder.removeAllViews()
-            assignments.forEach { assignment ->
+            upcomingAssignments.forEach { assignment ->
                 val newAssignmentView = inflater?.inflate(R.layout.view_assignment, upcomingAssignmentsHolder, false) as? AssignmentView
                 newAssignmentView?.setAssignment(this.userInfo?.userId ?: return, assignment)
                 upcomingAssignmentsHolder.addView(newAssignmentView)
+            }
+        }
+        rootView?.findViewById<ViewGroup>(R.id.other_assignments_holder)?.let { otherAssignmentsHolder ->
+            otherAssignmentsHolder.removeAllViews()
+            assignments.filter{ !upcomingAssignments.contains(it) }.forEach { assignment ->
+                val newAssignmentView = inflater?.inflate(R.layout.view_assignment, otherAssignmentsHolder, false) as? AssignmentView
+                newAssignmentView?.setAssignment(this.userInfo?.userId ?: return, assignment)
+                otherAssignmentsHolder.addView(newAssignmentView)
             }
         }
     }
