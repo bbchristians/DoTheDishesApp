@@ -5,12 +5,14 @@
     <LinearLayout
                   android:orientation="vertical"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent">
+                  android:layout_height="wrap_content">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginTop="48dp"
                 android:orientation="vertical"
                 android:gravity="center_vertical">
 
@@ -52,6 +54,44 @@
                     android:text="@string/submit_button"/>
 
         </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <View
+                    android:layout_width="150dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPale"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/separator_or"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"/>
+
+            <View
+                    android:layout_width="150dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPale"/>
+
+        </LinearLayout>
+
+        <Button style="@style/ButtonPrimary"
+                android:id="@+id/create_button"
+                android:layout_width="match_parent"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="48dp"
+                android:text="@string/button_create_room"/>
 
         <LinearLayout
                 android:layout_width="match_parent"

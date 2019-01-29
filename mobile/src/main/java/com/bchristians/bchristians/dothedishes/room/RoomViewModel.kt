@@ -3,7 +3,12 @@ package com.bchristians.bchristians.dothedishes.room
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.bchristians.bchristians.dothedishes.injection.Repository
+import com.bchristians.bchristians.dothedishes.injection.WebRequest
+import com.bchristians.bchristians.dothedishes.injection.WebRequestEndPoint
+import com.bchristians.bchristians.dothedishes.injection.requests.CreateRoomPayload
 import com.bchristians.bchristians.dothedishes.injection.responses.Room
+import com.bchristians.bchristians.dothedishes.injection.responses.RoomIdResponse
+import com.bchristians.bchristians.dothedishes.injection.responses.WebResponsePayload
 import com.bchristians.bchristians.dothedishes.room.assignment.Assignment
 import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentRepetition
 import com.bchristians.bchristians.dothedishes.room.assignment.ScheduleAvailabilityView
@@ -81,7 +86,18 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
             }
             curDay++
         }
-        print(userAssignments)
+    }
+
+    fun createRoom(roomName: String): LiveData<WebResponsePayload> {
+        val requestLiveData = repository.makeRequest(
+            WebRequest(
+                WebRequestEndPoint.CREATE_ROOM,
+                RoomIdResponse::class.java,
+                CreateRoomPayload(roomName)
+            )
+        )
+        (requestLiveData as? MutableLiveData<WebResponsePayload>)?.postValue(RoomIdResponse(1))
+        return requestLiveData
     }
 
     companion object {

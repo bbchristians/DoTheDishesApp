@@ -1,5 +1,8 @@
 package com.bchristians.bchristians.dothedishes.injection.requests
 
+import com.google.gson.annotations.SerializedName
+
 class CreateRoomPayload(
-    roomName: String
+    @SerializedName("roomName")
+    val roomName: String
 )

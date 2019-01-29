@@ -12,6 +12,8 @@
     <string name="submit_button">Submit</string>
     <string name="unknown_room_id">UNKNOWN_ROOM_ID</string>
     <string name="unknown_user_id">UNKNOWN_USER_ID</string>
+    <string name="separator_or">or</string>
+    <string name="button_create_room">Create Room</string>
 
     <!-- Room View -->
     <string name="welcome_text">%s, you\'re in</string>
@@ -53,6 +55,12 @@
     <string name="weekday_thursday">T</string>
     <string name="weekday_friday">F</string>
     <string name="weekday_saturday">S</string>
+
+    <!-- Create Room -->
+    <string name="create_room_title">Create Room</string>
+    <string name="create_room_field_name">Room Name</string>
+    <string name="create_room_field_name_hint">The Good Place</string>
+    <string name="create_room_button_create">Create Room</string>
 
     <!-- Constants -->
     <string name="user_info_id_key">USER_INFO</string>

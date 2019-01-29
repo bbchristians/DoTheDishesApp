@@ -21,6 +21,7 @@ class SelectRoomFragment: Fragment() {
         this.inflater = inflater
         this.rootView?.let {
             initSubmitButton(it)
+            initCreateButton(it)
         }
 
         return this.rootView
@@ -45,6 +46,14 @@ class SelectRoomFragment: Fragment() {
                 } else {
                     (this.context as? MainActivity)?.submitRoomId(UserInfo(enteredUserId, enteredRoomId))
                 }
+            }
+        }
+    }
+
+    private fun initCreateButton(root: View) {
+        root.findViewById<Button>(R.id.create_button)?.let { button ->
+            button.setOnClickListener {
+                (this.activity as? MainActivity)?.startCreateRoomActivity()
             }
         }
     }
