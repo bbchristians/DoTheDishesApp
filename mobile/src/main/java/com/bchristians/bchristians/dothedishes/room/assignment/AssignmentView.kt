@@ -12,7 +12,7 @@ import java.util.*
 
 class AssignmentView(c: Context, a: AttributeSet): LinearLayout(c,a) {
 
-    val dateFormat = SimpleDateFormat("MMM dd", Locale.US)
+    val dateFormat = SimpleDateFormat("MMM d", Locale.US)
 
     fun setAssignment(userId: String, assignment: Assignment) {
         // Text fields

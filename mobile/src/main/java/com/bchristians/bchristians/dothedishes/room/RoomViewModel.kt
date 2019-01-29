@@ -87,7 +87,7 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
                     // TODO report if no task added
                 }
             }
-            curDay++
+            curDay += frequency.frequency
         }
 
         // Get alert field

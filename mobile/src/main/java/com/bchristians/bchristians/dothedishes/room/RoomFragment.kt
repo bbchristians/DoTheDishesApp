@@ -71,7 +71,9 @@ class RoomFragment: Fragment(), Observer<Room> {
     }
 
     private fun displayAssignments(assignments: List<Assignment>) {
-        val upcomingAssignments = assignments.filter { assignment ->
+        val sortedAssignments = assignments.sortedBy { it.date }
+        // This is not an efficient approach
+        val upcomingAssignments = sortedAssignments.filter { assignment ->
             assignment.assignedUser == this.userInfo?.userId &&
                     assignment.date != null &&
                     RoomViewModel.daysBetween(Calendar.getInstance().time, assignment.date) < 8
@@ -86,7 +88,7 @@ class RoomFragment: Fragment(), Observer<Room> {
         }
         rootView?.findViewById<ViewGroup>(R.id.other_assignments_holder)?.let { otherAssignmentsHolder ->
             otherAssignmentsHolder.removeAllViews()
-            assignments.filter{ !upcomingAssignments.contains(it) }.forEach { assignment ->
+            sortedAssignments.filter{ !upcomingAssignments.contains(it) }.forEach { assignment ->
                 val newAssignmentView = inflater?.inflate(R.layout.view_assignment, otherAssignmentsHolder, false) as? AssignmentView
                 newAssignmentView?.setAssignment(this.userInfo?.userId ?: return, assignment)
                 otherAssignmentsHolder.addView(newAssignmentView)
