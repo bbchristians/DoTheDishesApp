@@ -22,7 +22,7 @@
     <string name="assignments_upcoming">Upcoming Assignments:</string>
     <string name="assignments_upcoming_empty">You have no upcoming assignments!</string>
     <string name="assignments_other">Assignments:</string>
-    <string name="assignments_other_empty">There are no assignments for this room.</string>
+    <string name="assignments_other_empty">There are no other assignments for this room.</string>
     <string name="assignments_create">New</string>
 
     <string name="action_button_nudge">Nudge</string>
