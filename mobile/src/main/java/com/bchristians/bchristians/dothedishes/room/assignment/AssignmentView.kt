@@ -14,7 +14,7 @@ class AssignmentView(c: Context, a: AttributeSet): LinearLayout(c,a) {
         this.findViewById<TextView>(R.id.assignment_title)?.text = assignment.name
         this.findViewById<TextView>(R.id.assignment_date)?.text = formatDate(assignment.date)
         // Button
-        if( userId == assignment.assignedUserId ) {
+        if( userId == assignment.assignedUser ) {
             this.findViewById<TextView>(R.id.action_button)?.text = this.context.getString(R.string.action_button_complete)
         } else {
             this.findViewById<TextView>(R.id.action_button)?.text = this.context.getString(R.string.action_button_nudge)

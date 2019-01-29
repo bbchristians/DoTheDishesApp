@@ -11,10 +11,10 @@ import com.bchristians.bchristians.dothedishes.user.UserInfo
 
 class PreviousRoomView(c: Context, a: AttributeSet): LinearLayout(c, a) {
 
-    var roomId: UserInfo = UserInfo("", "")
+    var roomId: UserInfo = UserInfo("", -1)
     set (value) {
         field = value
-        this.findViewById<TextView>(R.id.room_id)?.text = value.roomId
+        this.findViewById<TextView>(R.id.room_id)?.text = value.roomId.toString()
         this.findViewById<TextView>(R.id.user_id)?.text = value.userId
         this.findViewById<Button>(R.id.submit_button_prev)?.setOnClickListener {
             (this.context as? MainActivity)?.submitRoomId(value)

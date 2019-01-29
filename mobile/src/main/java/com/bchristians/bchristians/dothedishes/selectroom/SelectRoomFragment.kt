@@ -44,7 +44,7 @@ class SelectRoomFragment: Fragment() {
                 } else if( enteredUserId.isEmpty() ) {
                     // TODO report error
                 } else {
-                    (this.context as? MainActivity)?.submitRoomId(UserInfo(enteredUserId, enteredRoomId))
+                    (this.context as? MainActivity)?.submitRoomId(UserInfo(enteredUserId, enteredRoomId.toIntOrNull() ?: return@setOnClickListener))
                 }
             }
         }

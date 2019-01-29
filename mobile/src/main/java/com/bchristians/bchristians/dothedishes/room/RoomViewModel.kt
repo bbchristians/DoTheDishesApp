@@ -5,24 +5,20 @@ import android.arch.lifecycle.MutableLiveData
 import com.bchristians.bchristians.dothedishes.injection.Repository
 import com.bchristians.bchristians.dothedishes.injection.WebRequest
 import com.bchristians.bchristians.dothedishes.injection.WebRequestEndPoint
-import com.bchristians.bchristians.dothedishes.injection.requests.CreateRoomPayload
-import com.bchristians.bchristians.dothedishes.injection.responses.Room
-import com.bchristians.bchristians.dothedishes.injection.responses.RoomIdResponse
-import com.bchristians.bchristians.dothedishes.injection.responses.WebResponsePayload
+import com.bchristians.bchristians.dothedishes.injection.requests.*
+import com.bchristians.bchristians.dothedishes.injection.responses.*
 import com.bchristians.bchristians.dothedishes.room.assignment.Assignment
 import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentRepetition
 import com.bchristians.bchristians.dothedishes.room.assignment.ScheduleAvailabilityView
-import com.bchristians.bchristians.dothedishes.user.UserInfo
 import java.util.*
 import javax.inject.Inject
 
 
-
 class RoomViewModel @Inject constructor(private val repository: Repository) {
 
-    private val roomLiveData: HashMap<String, MutableLiveData<Room>> = hashMapOf()
+    private val roomLiveData: HashMap<Int, MutableLiveData<Room>> = hashMapOf()
 
-    fun getRoomLiveData(roomId: String): LiveData<Room> {
+    fun getRoomLiveData(roomId: Int): LiveData<Room> {
         if( this.roomLiveData.containsKey(roomId) ) {
             makeRoomLiveDataRequest(roomId)
             return this.roomLiveData[roomId] as LiveData<Room>
@@ -32,29 +28,36 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
         return this.roomLiveData[roomId] as LiveData<Room>
     }
 
-    fun makeRoomLiveDataRequest(roomId: String) {
-        roomLiveData[roomId]?.postValue(
-            Room(
-                "12345",
-                "The Good Place",
-                listOf(
-                    UserInfo("Kyle", "12345"),
-                    UserInfo("Oscar", "12345"),
-                    UserInfo("Mehryaar", "12345"),
-                    UserInfo("Ben", "12345")
-                ),
-                listOf(
-                    Assignment("Do the Dishes", Date(), false, "Kyle", "12345", "Kyle")
+    fun makeRoomLiveDataRequest(roomId: Int) {
+        this.repository.makeRequest(
+            WebRequest(
+                WebRequestEndPoint.GET_ROOM,
+                Room::class.java,
+                GetRoomPayload(roomId)
+            )
+        ).observeForever { responsePayload ->
+            if( responsePayload is Room )
+                roomLiveData[roomId]?.postValue(responsePayload)
+        }
+    }
+
+    fun registerUser(roomId: Int, userId: String) {
+        repository.makeRequest(
+            WebRequest(
+                WebRequestEndPoint.REGISTER_USER,
+                RegisterUserResponse::class.java,
+                RegisterUserPayload(
+                    userId, roomId
                 )
             )
         )
     }
 
     fun createAndPostAssignmentCreationEvent(
-        roomId: String, assignmentName: String, frequency: AssignmentRepetition,
+        roomId: Int, assignmentName: String, frequency: AssignmentRepetition,
         createdUserId: String, userAvailability: Map<String, List<ScheduleAvailabilityView.DayOfTheWeek>>
-    ) {
-        val roomData = this.roomLiveData[roomId]?.value ?: return
+    ): LiveData<Boolean>? {
+        val roomData = this.roomLiveData[roomId]?.value ?: return null
         // Shuffle the list of users to actually randomize the list
         val shuffledUsers = userAvailability.keys.shuffled()
 
@@ -86,6 +89,37 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
             }
             curDay++
         }
+
+        // Get alert field
+        val alertBoolLiveData = MutableLiveData<Boolean>()
+
+        val allNewAssignments = userAssignments.values.flatMap{ value ->
+            value.map{ assignment ->
+                PayloadAssignment(
+                    assignment.assignedUser ?: return null,
+                    assignment.name ?: return null,
+                    assignment.date ?: return null
+                )
+            }
+        }
+
+        // Post requests to endpoint
+        repository.makeRequest(
+            WebRequest(
+                WebRequestEndPoint.CREATE_ASSIGNMENT,
+                AssignmentIdsResponse::class.java,
+                CreateAssignmentPayload(
+                    roomId,
+                    createdUserId,
+                    allNewAssignments
+                )
+            )
+        ).observeForever {
+            makeRoomLiveDataRequest(roomId)
+            alertBoolLiveData.postValue(true)
+        }
+
+        return alertBoolLiveData
     }
 
     fun createRoom(roomName: String): LiveData<WebResponsePayload> {

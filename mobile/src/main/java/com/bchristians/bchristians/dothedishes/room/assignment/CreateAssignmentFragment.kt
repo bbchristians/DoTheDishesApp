@@ -93,7 +93,9 @@ class CreateAssignmentFragment: Fragment(), Observer<Room> {
                 frequency,
                 this.userInfo?.userId ?: return@setOnClickListener,
                 availability
-            )
+            )?.observeForever { _ ->
+                this.activity?.finish()
+            }
         }
 
         // Frequency Single Select

@@ -45,11 +45,14 @@ class CreateRoomFragment: Fragment() {
                 // TODO report error
                 return@setOnClickListener
             }
-            // TODO make create request
-            // TODO using the created room ID, direct the user to the newly created room
             roomViewModel.createRoom(enteredName).observeForever { responsePayload ->
                 if( responsePayload is RoomIdResponse ) {
-                    (this.activity as? CreateRoomActivity)?.submitRoomId(UserInfo(enteredUserId, responsePayload.roomId.toString()))
+                    (this.activity as? CreateRoomActivity)?.submitRoomId(
+                        UserInfo(
+                            enteredUserId,
+                            responsePayload.roomId ?: return@observeForever
+                        )
+                    )
                 }
             }
         }

@@ -19,7 +19,7 @@ class SharedPreferencesClient(context: Context) {
             try {
                 gson.fromJson(userInfoString, UserInfo::class.java)
             } catch( e: JsonParseException ) {
-                UserInfo("", "")
+                UserInfo("", -1)
             }
         }.toMutableList()
     }

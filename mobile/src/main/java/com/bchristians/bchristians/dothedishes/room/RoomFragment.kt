@@ -34,13 +34,14 @@ class RoomFragment: Fragment(), Observer<Room> {
 
         this.userInfo = this.arguments?.getParcelable(this.context?.getString(R.string.user_info_id_key))
 
-        this.userInfo?.roomId?.let {
-            roomViewModel.getRoomLiveData(it).observe(this,this)
-        }
-
         rootView?.let {
             initAssignmentButtons(it)
             initTitleText()
+        }
+
+        this.userInfo?.roomId?.let {
+            roomViewModel.getRoomLiveData(it).observe(this,this)
+            roomViewModel.registerUser(it, this.userInfo?.userId ?: return@let )
         }
 
         return rootView
