@@ -2,6 +2,7 @@ package com.bchristians.bchristians.dothedishes.room.assignment
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bchristians.bchristians.dothedishes.R
@@ -18,11 +19,16 @@ class AssignmentView(c: Context, a: AttributeSet): LinearLayout(c,a) {
         // Text fields
         this.findViewById<TextView>(R.id.assignment_title)?.text = assignment.name
         this.findViewById<TextView>(R.id.assignment_date)?.text = formatDate(assignment.date)
-        // Button
+        // User dependent fields
         if( userId == assignment.assignedUser ) {
             this.findViewById<TextView>(R.id.action_button)?.text = this.context.getString(R.string.action_button_complete)
         } else {
             this.findViewById<TextView>(R.id.action_button)?.text = this.context.getString(R.string.action_button_nudge)
+            // Hide nudge if more than 1 day out
+            if( assignment.date != null && RoomViewModel.daysBetween(Calendar.getInstance().time, assignment.date) > 0 ) {
+                this.findViewById<TextView>(R.id.action_button)?.visibility = View.GONE
+            }
+            this.findViewById<TextView>(R.id.assignment_user)?.text = userId
         }
     }
 

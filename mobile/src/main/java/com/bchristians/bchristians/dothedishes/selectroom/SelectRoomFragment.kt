@@ -7,18 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import com.bchristians.bchristians.dothedishes.DishesApplication
 import com.bchristians.bchristians.dothedishes.MainActivity
 import com.bchristians.bchristians.dothedishes.R
+import com.bchristians.bchristians.dothedishes.room.RoomViewModel
 import com.bchristians.bchristians.dothedishes.user.UserInfo
+import javax.inject.Inject
 
 class SelectRoomFragment: Fragment() {
 
     private var rootView: View? = null
     private var inflater: LayoutInflater? = null
 
+    @Inject
+    lateinit var roomViewModel: RoomViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.rootView = inflater.inflate(R.layout.fragment_select_room, container, false)
         this.inflater = inflater
+
+        DishesApplication.getApplication().injectorComponent.inject(this)
+
         this.rootView?.let {
             initSubmitButton(it)
             initCreateButton(it)
@@ -44,7 +53,11 @@ class SelectRoomFragment: Fragment() {
                 } else if( enteredUserId.isEmpty() ) {
                     // TODO report error
                 } else {
-                    (this.context as? MainActivity)?.submitRoomId(UserInfo(enteredUserId, enteredRoomId.toIntOrNull() ?: return@setOnClickListener))
+                    enteredRoomId.toIntOrNull()?.let { roomId ->
+                        roomViewModel.getRoomLiveData(roomId).observeForever { _ ->
+                            (this.context as? MainActivity)?.submitRoomId(UserInfo(enteredUserId, roomId))
+                        }
+                    }
                 }
             }
         }

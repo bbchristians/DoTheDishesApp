@@ -78,20 +78,28 @@ class RoomFragment: Fragment(), Observer<Room> {
                     assignment.date != null &&
                     RoomViewModel.daysBetween(Calendar.getInstance().time, assignment.date) < 8
         }
-        rootView?.findViewById<ViewGroup>(R.id.upcoming_assignments_holder)?.let { upcomingAssignmentsHolder ->
-            upcomingAssignmentsHolder.removeAllViews()
-            upcomingAssignments.forEach { assignment ->
-                val newAssignmentView = inflater?.inflate(R.layout.view_assignment, upcomingAssignmentsHolder, false) as? AssignmentView
-                newAssignmentView?.setAssignment(this.userInfo?.userId ?: return, assignment)
-                upcomingAssignmentsHolder.addView(newAssignmentView)
+        // Populate upcoming assignments
+        if( upcomingAssignments.isNotEmpty() ) {
+            rootView?.findViewById<ViewGroup>(R.id.upcoming_assignments_holder)?.let { upcomingAssignmentsHolder ->
+                upcomingAssignmentsHolder.removeAllViews()
+                upcomingAssignments.forEach { assignment ->
+                    val newAssignmentView =
+                        inflater?.inflate(R.layout.view_assignment, upcomingAssignmentsHolder, false) as? AssignmentView
+                    newAssignmentView?.setAssignment(this.userInfo?.userId ?: return, assignment)
+                    upcomingAssignmentsHolder.addView(newAssignmentView)
+                }
             }
         }
-        rootView?.findViewById<ViewGroup>(R.id.other_assignments_holder)?.let { otherAssignmentsHolder ->
-            otherAssignmentsHolder.removeAllViews()
-            sortedAssignments.filter{ !upcomingAssignments.contains(it) }.forEach { assignment ->
-                val newAssignmentView = inflater?.inflate(R.layout.view_assignment, otherAssignmentsHolder, false) as? AssignmentView
-                newAssignmentView?.setAssignment(this.userInfo?.userId ?: return, assignment)
-                otherAssignmentsHolder.addView(newAssignmentView)
+        // Populate other assign
+        if( upcomingAssignments.size < sortedAssignments.size && sortedAssignments.isNotEmpty() ) {
+            rootView?.findViewById<ViewGroup>(R.id.other_assignments_holder)?.let { otherAssignmentsHolder ->
+                otherAssignmentsHolder.removeAllViews()
+                sortedAssignments.filter { !upcomingAssignments.contains(it) }.forEach { assignment ->
+                    val newAssignmentView =
+                        inflater?.inflate(R.layout.view_assignment, otherAssignmentsHolder, false) as? AssignmentView
+                    newAssignmentView?.setAssignment(this.userInfo?.userId ?: return, assignment)
+                    otherAssignmentsHolder.addView(newAssignmentView)
+                }
             }
         }
     }
