@@ -62,7 +62,9 @@ class AssignmentView(c: Context, a: AttributeSet): LinearLayout(c,a) {
     }
 
     private fun setNudgeButtonOnClick() {
-        // TODO
+        this.findViewById<Button>(R.id.action_button)?.setOnClickListener {
+            roomViewModel.sendNudge(this.assignmentId ?: return@setOnClickListener)
+        }
         this.actionButtonEnabled = true
     }
 

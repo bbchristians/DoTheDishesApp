@@ -166,6 +166,16 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
         )
     }
 
+    fun sendNudge(assignmentId: Int): LiveData<WebResponsePayload> {
+        return repository.makeRequest(
+            WebRequest(
+                WebRequestEndPoint.NUDGE,
+                NudgeResponse::class.java,
+                NudgeRequest(assignmentId)
+            )
+        )
+    }
+
     companion object {
 
         private const val TIMEOUT_MS = 15000L

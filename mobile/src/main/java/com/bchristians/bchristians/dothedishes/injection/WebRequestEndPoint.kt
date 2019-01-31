@@ -8,5 +8,6 @@ enum class WebRequestEndPoint(
     GET_ROOM("get_room", "GET"),
     CREATE_ASSIGNMENT("create_assignment", "POST"),
     REGISTER_USER("register_user", "POST"),
-    DELETE_ASSIGNMENT("delete_assignment", "POST")
+    DELETE_ASSIGNMENT("delete_assignment", "POST"),
+    NUDGE("nudge", "POST")
 }
