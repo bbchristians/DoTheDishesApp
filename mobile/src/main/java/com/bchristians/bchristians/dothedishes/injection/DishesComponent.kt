@@ -2,6 +2,7 @@ package com.bchristians.bchristians.dothedishes.injection
 
 import com.bchristians.bchristians.dothedishes.createroom.CreateRoomFragment
 import com.bchristians.bchristians.dothedishes.room.RoomFragment
+import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentView
 import com.bchristians.bchristians.dothedishes.room.assignment.CreateAssignmentFragment
 import com.bchristians.bchristians.dothedishes.selectroom.SelectRoomFragment
 import dagger.Component
@@ -18,6 +19,8 @@ interface DishesComponent {
     fun inject(f: CreateRoomFragment)
 
     fun inject(f: SelectRoomFragment)
+
+    fun inject(v: AssignmentView)
 
 }
 

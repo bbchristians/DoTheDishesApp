@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#070d59</color>
     <color name="colorAccent">#5893d4</color>
     <color name="colorPale">#ceddef</color>
+
+    <color name="errorBright">#D8000C</color>
+    <color name="errorPale">#ff5b64</color>
 </resources>

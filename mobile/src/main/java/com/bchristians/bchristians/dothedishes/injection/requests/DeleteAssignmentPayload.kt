@@ -1,5 +1,5 @@
 package com.bchristians.bchristians.dothedishes.injection.requests
 
 class DeleteAssignmentPayload(
-    val assignmentId: Integer
+    val assignmentId: Int
 )

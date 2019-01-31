@@ -45,6 +45,19 @@
             android:layout_gravity="center_vertical"
             android:paddingEnd="14dp"
             android:paddingStart="8dp"
+            android:visibility="visible"
             tools:text="@string/action_button_complete"/>
+
+    <Button
+            android:id="@+id/delete_button"
+            style="@style/ButtonPrimary"
+            android:background="@drawable/button_error"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:paddingEnd="14dp"
+            android:paddingStart="8dp"
+            android:text="@string/delete_assignment_button"
+            android:visibility="gone"/>
 
 </com.bchristians.bchristians.dothedishes.room.assignment.AssignmentView>

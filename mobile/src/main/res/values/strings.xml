@@ -25,11 +25,14 @@
     <string name="assignments_other_empty">There are no other assignments for this room.</string>
     <string name="assignments_create">New</string>
 
+    <string name="assignment_assigned_you">You</string>
+
     <string name="action_button_nudge">Nudge</string>
     <string name="action_button_complete">Complete</string>
 
     <string name="delete_mode_button_on">Stop Deleting</string>
     <string name="delete_mode_button_off">Delete</string>
+    <string name="delete_assignment_button">Delete</string>
 
     <!-- Create Assignment View -->
     <string name="create_assignment_title">Create Assignment</string>

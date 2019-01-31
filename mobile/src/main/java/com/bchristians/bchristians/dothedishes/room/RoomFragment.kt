@@ -66,7 +66,9 @@ class RoomFragment: Fragment(), Observer<Room> {
         }
 
         rootView.findViewById<ToggleButton>(R.id.delete_mode_button)?.let { deleteModeButton ->
-            // TODO make this button work
+            deleteModeButton.setOnCheckedChangeListener { _, isChecked ->
+                setAssignmentDeleteMode(isChecked)
+            }
         }
     }
 
@@ -106,6 +108,20 @@ class RoomFragment: Fragment(), Observer<Room> {
 
     private fun updateTitleInfo(room: Room) {
         this.rootView?.findViewById<TextView>(R.id.room_name)?.text = room.roomName
+    }
+
+    private fun setAssignmentDeleteMode(enabled: Boolean) {
+        setAssignmentDeleteModeOnHolder(enabled, this.rootView?.findViewById(R.id.other_assignments_holder))
+        setAssignmentDeleteModeOnHolder(enabled, this.rootView?.findViewById(R.id.upcoming_assignments_holder))
+    }
+
+    private fun setAssignmentDeleteModeOnHolder(enabled: Boolean, holder: ViewGroup?) {
+        holder?.let { h ->
+            (0 until h.childCount).forEach { childIndex ->
+                val assignmentView = h.getChildAt(childIndex) as? AssignmentView
+                assignmentView?.setDeleteMode(enabled)
+            }
+        }
     }
 
     override fun onChanged(t: Room?) {

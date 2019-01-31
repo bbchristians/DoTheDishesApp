@@ -133,6 +133,18 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
         return requestLiveData
     }
 
+    fun deleteAssignment(assignmentId: Int): LiveData<WebResponsePayload> {
+        return repository.makeRequest(
+            WebRequest(
+                WebRequestEndPoint.DELETE_ASSIGNMENT,
+                DeleteAssignmentResponse::class.java,
+                DeleteAssignmentPayload(
+                    assignmentId
+                )
+            )
+        )
+    }
+
     companion object {
 
         fun daysBetween(d1: Date, d2: Date): Long {
