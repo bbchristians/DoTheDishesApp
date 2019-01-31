@@ -1,5 +1,6 @@
 package com.bchristians.bchristians.dothedishes.injection
 
+import com.bchristians.bchristians.dothedishes.LaunchActivity
 import com.bchristians.bchristians.dothedishes.createroom.CreateRoomFragment
 import com.bchristians.bchristians.dothedishes.room.RoomFragment
 import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentView
@@ -21,6 +22,8 @@ interface DishesComponent {
     fun inject(f: SelectRoomFragment)
 
     fun inject(v: AssignmentView)
+
+    fun inject(a: LaunchActivity)
 
 }
 

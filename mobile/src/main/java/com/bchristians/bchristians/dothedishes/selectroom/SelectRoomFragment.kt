@@ -10,6 +10,7 @@ import android.widget.EditText
 import com.bchristians.bchristians.dothedishes.DishesApplication
 import com.bchristians.bchristians.dothedishes.MainActivity
 import com.bchristians.bchristians.dothedishes.R
+import com.bchristians.bchristians.dothedishes.pushnotifications.FirebaseViewModel
 import com.bchristians.bchristians.dothedishes.room.RoomViewModel
 import com.bchristians.bchristians.dothedishes.user.UserInfo
 import javax.inject.Inject
@@ -21,6 +22,9 @@ class SelectRoomFragment: Fragment() {
 
     @Inject
     lateinit var roomViewModel: RoomViewModel
+
+    @Inject
+    lateinit var firebaseViewModel: FirebaseViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.rootView = inflater.inflate(R.layout.fragment_select_room, container, false)
@@ -54,8 +58,14 @@ class SelectRoomFragment: Fragment() {
                     // TODO report error
                 } else {
                     enteredRoomId.toIntOrNull()?.let { roomId ->
-                        roomViewModel.getRoomLiveData(roomId).observeForever { _ ->
-                            (this.context as? MainActivity)?.submitRoomId(UserInfo(enteredUserId, roomId))
+                        roomViewModel.checkRoomExists(roomId).observeForever { exists ->
+                            if( exists == true ) {
+                                val thisUserInfo = UserInfo(enteredUserId, roomId)
+                                firebaseViewModel.setRegistrationSubscription(thisUserInfo)
+                                (this.context as? MainActivity)?.submitRoomId(thisUserInfo)
+                            } else {
+                                // TODO report room does not exist
+                            }
                         }
                     }
                 }

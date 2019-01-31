@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "346176415401",
+    "firebase_url": "https://do-the-dishes.firebaseio.com",
+    "project_id": "do-the-dishes",
+    "storage_bucket": "do-the-dishes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346176415401:android:42d63d336228b58d",
+        "android_client_info": {
+          "package_name": "com.bchristians.bchristians.dothedishes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346176415401-s39hemq5a1p37cfhghq9ue9qr7jg1st8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeEOneZlGmwrLY3kZXSj3muYDxjO_8F78"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

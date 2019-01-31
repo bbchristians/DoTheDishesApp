@@ -12,11 +12,32 @@ import com.bchristians.bchristians.dothedishes.room.assignment.AssignmentRepetit
 import com.bchristians.bchristians.dothedishes.room.assignment.ScheduleAvailabilityView
 import java.util.*
 import javax.inject.Inject
+import android.arch.lifecycle.Observer
+import android.os.Handler
 
 
 class RoomViewModel @Inject constructor(private val repository: Repository) {
 
     private val roomLiveData: HashMap<Int, MutableLiveData<Room>> = hashMapOf()
+
+    fun checkRoomExists(roomId: Int): LiveData<Boolean> {
+        val existsLiveData = MutableLiveData<Boolean>()
+        val roomLiveData = getRoomLiveData(roomId)
+        roomLiveData.observeForever(object: Observer<Room> {
+            override fun onChanged(t: Room?) {
+                existsLiveData.postValue(true)
+                roomLiveData.removeObserver(this)
+            }
+        })
+        // Set timeout
+        Handler().postDelayed({
+            if( existsLiveData.value != true ) {
+                existsLiveData.postValue(false)
+            }
+        }, TIMEOUT_MS)
+
+        return existsLiveData
+    }
 
     fun getRoomLiveData(roomId: Int): LiveData<Room> {
         if( this.roomLiveData.containsKey(roomId) ) {
@@ -146,6 +167,8 @@ class RoomViewModel @Inject constructor(private val repository: Repository) {
     }
 
     companion object {
+
+        private const val TIMEOUT_MS = 15000L
 
         fun daysBetween(d1: Date, d2: Date): Long {
             return ((d2.time - d1.time) / (1000L * 60L * 60L * 24L))

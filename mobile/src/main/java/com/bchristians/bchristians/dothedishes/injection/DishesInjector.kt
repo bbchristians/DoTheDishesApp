@@ -1,5 +1,6 @@
 package com.bchristians.bchristians.dothedishes.injection
 
+import com.bchristians.bchristians.dothedishes.pushnotifications.FirebaseViewModel
 import com.bchristians.bchristians.dothedishes.room.RoomViewModel
 import dagger.Module
 import dagger.Provides
@@ -11,4 +12,8 @@ class DishesInjector(private val repository: Repository) {
     @Provides
     @Singleton
     fun providesRoomViewModel() = RoomViewModel(this.repository)
+
+    @Provides
+    @Singleton
+    fun providesFirebaseViewModel() = FirebaseViewModel(this.repository)
 }
